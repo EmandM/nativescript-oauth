@@ -157,7 +157,7 @@ export function login(navOptions?: TnsOAuth.INavigationOptions | string): Promis
     if (typeof navOptions === "string") {
         navOptions = { successPage: navOptions };
     }
-    return instance.login(navOptions);
+    return instance.login(navOptions || {});
 }
 export function logout(successPage?: string);
 export function logout(navOptions?: TnsOAuth.INavigationOptions);
@@ -166,17 +166,17 @@ export function logout(navOptions?: TnsOAuth.INavigationOptions | string): Promi
     if (typeof navOptions === "string") {
         navOptions = { successPage: navOptions };
     }
-    return instance.logout(navOptions);
+    return instance.logout(navOptions || {});
 }
 export function accessTokenExpired(): boolean {
     return instance.accessTokenExpired();
 }
 
-export function ensureValidToken(): Promise<string> {
+export function ensureValidToken(navOptions?: TnsOAuth.INavigationOptions): Promise<string> {
     return new Promise((resolve, reject) => {
         if (instance.accessTokenExpired()) {
             if (instance.refreshTokenExpired()) {
-                login()
+                login(navOptions)
                     .then((response: string) => {
                         resolve(response);
                     })
