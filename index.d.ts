@@ -17,5 +17,5 @@ export declare function login(navOptions?: TnsOAuth.INavigationOptions): Promise
 export declare function logout(successPage?: string): Promise<void>;
 export declare function logout(navOptions?: TnsOAuth.INavigationOptions): Promise<void>;
 export declare function accessTokenExpired(): boolean;
-export declare function ensureValidToken(): Promise<string>;
+export declare function ensureValidToken(navOptions?: TnsOAuth.INavigationOptions): Promise<string>;
 
